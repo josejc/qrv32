@@ -1,8 +1,0 @@
-qemu-system-riscv32 -machine virt -bios hqemu32.bin
-qemu-system-riscv64 -machine virt -bios hqemu64.bin
-qemu-system-riscv32 -nographic -serial mon:stdio -machine virt -bios h.bin
-qemu-system-riscv32 -nographic -serial mon:stdio -machine virt -bios h.bin -s -S
-
-gdb (another shell)
-%target remote :1234
-
