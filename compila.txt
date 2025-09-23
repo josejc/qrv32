@@ -1,3 +1,0 @@
-32b
-ic -FVSw helloq.c
-il -l -a -H 1 -T0x80000000 -R4 -o hq32.bin l.i helloq.i
