@@ -1,0 +1,9 @@
+set disassemble-next-line on
+disas 0xaddress_start, 0xaddress_end		# disassambly block memory
+stepi (si)					# step instruction
+break *0xaddress				# without info, imp. (*)
+info reg (i r)					# print registers
+x/20x 0xaddress					# print hex 20
+x/20c 0xaddress					# print ascii 20
+x/10xg 0xaddress				# print hex 8byte giant 
+set $a1=value					# change value register a1
