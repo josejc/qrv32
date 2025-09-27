@@ -5,13 +5,21 @@ objtype=riscv
 OBJ=\
 	l.$O\
 	sbi.$O\
+
+OBJ_M=\
 	main.$O\
+
+OBJ_T=\
+	timer.$O\
 
 CFLAGS=-FVw
 LDFLAGS=-l -a -u -H5 -R4096 -T$loadaddr
 
-hq32.bin: $OBJ
+hq32.bin: $OBJ $OBJ_M
 	$LD $LDFLAGS -o $target $prereq > hq32.asm
+
+timer.bin: $OBJ $OBJ_T
+	$LD $LDFLAGS -o $target $prereq > timer.asm
 
 %.$O: %.c 
 	$CC $CFLAGS $prereq
@@ -20,4 +28,4 @@ hq32.bin: $OBJ
 	$AS $prereq
 
 clean:
-	rm -f $OBJ hq32.asm hq32.bin
+	rm -f $OBJ $OBJ_M $OBJ_T hq32.asm hq32.bin timer.asm timer.bin

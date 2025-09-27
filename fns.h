@@ -11,3 +11,14 @@
 int opensbi_ecall(unsigned long a0, unsigned long a1, unsigned long a2, unsigned long fid, unsigned long eid);
 void sbi_debug_console_write(sbiret *m);
 
+// Low level asm
+void write_stvec(uintptr);
+int set_sstatus_sie_bit(void);
+int get_rdtime(void);
+int set_sie_stie_bit(void);
+void clr_sip_bit(ulong bit);
+// to clear stip bit
+// clr_sip_bit(1<<5);
+
+
+
