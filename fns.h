@@ -20,7 +20,4 @@ int set_sie_stie_bit(void);
 void clr_sip_bit(ulong bit);
 // to clear stip bit
 // clr_sip_bit(1<<5);
-
-
-
-
+void trap_handler(void);

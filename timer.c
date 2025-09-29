@@ -19,9 +19,9 @@ set_timer_in_near_future(void)
 }
 
 void 
-setup_s_mode_interrupt(void *handler_ptr) 
+setup_s_mode_interrupt(void) 
 {
-	write_stvec((ulong) handler_ptr);	// set the interrupt addr. for s-mode
+	write_stvec((ulong) trap_handler);	// set the interrupt addr. for s-mode
 	set_sstatus_sie_bit();			// enable flag s-mode interrupt
 }
 
@@ -30,6 +30,7 @@ s_mode_interrupt_handler(void)
 {
 	struct sbiret message;
 
+	// We only expect the timer interrupt to happen here, no need to inspect the cause
 	clr_sip_bit(1<<5);			// clear timer pending bit
 	set_timer_in_near_future();
 
@@ -47,7 +48,7 @@ main(void)
 	message.value = (ulong) MSG1;
 	sbi_debug_console_write(&message);
 
-	setup_s_mode_interrupt(&s_mode_interrupt_handler);
+	setup_s_mode_interrupt();
 	set_timer_in_near_future();
 	set_sie_stie_bit();			// enable s-mode timer interrupt
 
@@ -60,9 +61,4 @@ main(void)
 		for (int i = 0; i < 300000000; i++); // Simulate a delay
 	}
 }
-
-
-
-
-
 

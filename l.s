@@ -1,6 +1,8 @@
 #include "mem.h"
 #include "csr.h"
 
+#define SRET    WORD $0x10200073      /* return from supervisor mode handling */
+
 // Special purpose registers (ureg.h):
 // R1: link register
 // R2: stack pointer
@@ -57,9 +59,26 @@ TEXT set_sie_stie_bit(SB), $-4
 	RET
 
 TEXT clr_sip_bit(SB), $-4
-//	MOVW CSR(sip), R8
-//	// Warning... sign extension? better use a temporary reg?
-//	AND $˜(32), R8			// bit 5 (stip) in register sip (s-mode time pending)
-//	MOVW R8, CSR(sip)
 	CSRRC	CSR(sip), R8, R0
 	RET
+
+TEXT trap_handler(SB), 1, $-32   // allocate 32 bytes stack frame
+    MOVW    R1, 0(SP)            // save return address (RA = R1)
+    MOVW    R5, 4(SP)            // save t0 (R5)
+    MOVW    R6, 8(SP)            // save t1 (R6)
+    MOVW    R7, 12(SP)           // save t2 (R7)
+
+    // call C handler (void s_mode_interrupt_handler(void))
+    MOVW $setSB(SB), R3
+    JAL R1, s_mode_interrupt_handler(SB)
+
+    ADD     $4, R6               // advance SEPC
+    MOVW    CSR(sepc), R6
+
+    MOVW    0(SP), R1            // restore RA
+    MOVW    4(SP), R5            // restore t0
+    MOVW    8(SP), R6            // restore t1
+    MOVW    12(SP), R7           // restore t2
+
+    SRET                         // return from trap
+
