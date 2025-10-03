@@ -3,9 +3,9 @@
 #include "dat.h"
 #include "fns.h"
 	
-void sbi_debug_console_write(sbiret *m) 
+int sbi_debug_console_write(sbiret *m) 
 {
-	SBI_ECALL(EID_DBCN, FID_DBCN_WRITE, m->error, m->value, 0);
+	return SBI_ECALL(EID_DBCN, FID_DBCN_WRITE, m->error, m->value, 0);
 }
 
 void sbi_set_timer(sbiret *m) 

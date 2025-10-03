@@ -5,6 +5,7 @@ objtype=riscv
 OBJ=\
 	l.$O\
 	sbi.$O\
+	uart.$O\
 
 OBJ_M=\
 	main.$O\
