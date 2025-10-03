@@ -14,10 +14,8 @@ void sbi_set_timer(sbiret *m);
 
 // Low level asm
 void write_stvec(uintptr);
-int set_sstatus_sie_bit(void);
+void set_sstatus_bit(ulong bit);
 int get_rdtime(void);
-int set_sie_stie_bit(void);
+void set_sie_bit(ulong bit);
 void clr_sip_bit(ulong bit);
-// to clear stip bit
-// clr_sip_bit(1<<5);
 void trap_handler(void);

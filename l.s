@@ -41,21 +41,16 @@ TEXT opensbi_ecall(SB), 1, $-4
 TEXT write_stvec(SB), $-4
 	MOVW R8, CSR(stvec)
 	RET
-
-TEXT set_sstatus_sie_bit(SB), $-4
-	MOVW CSR(sstatus), R8
-	OR $2, R8			// bit 2 in register sstatus
-	MOVW R8, CSR(sstatus)
+TEXT set_sstatus_bit(SB), $-4
+	CSRRS 	CSR(sstatus), R8, R0
 	RET
 
 TEXT get_rdtime(SB), 1, $-4
 	MOVW CSR(rdtime), R8
 	RET
 
-TEXT set_sie_stie_bit(SB), $-4
-	MOVW CSR(sie), R8
-	OR $32, R8			// bit 5 in register sie
-	MOVW R8, CSR(sie)
+TEXT set_sie_bit(SB), $-4		
+	CSRRS 	CSR(sie), R8, R0
 	RET
 
 TEXT clr_sip_bit(SB), $-4

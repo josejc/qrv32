@@ -18,3 +18,8 @@
 
 // Unprivileged Counter/Timers
 #define rdtime		0xc01 /* Timer for RDTIME instruction. */
+
+// Bits
+#define b_sie		1
+#define b_stie		5
+#define b_stip		5

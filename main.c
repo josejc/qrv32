@@ -6,6 +6,11 @@
 #define MSG1 "Hello world,\n"
 #define MSG2 "take me to your leader\n"
 
+void 
+s_mode_interrupt_handler(void)
+{
+}
+
 void
 main(void)
 {
@@ -19,5 +24,4 @@ main(void)
 	sbi_debug_console_write(&message);
 	for (;;);
 }
-
 
