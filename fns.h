@@ -20,4 +20,4 @@ void set_sie_bit(ulong bit);
 void clr_sip_bit(ulong bit);
 void trap_handler(void);
 void uartputc(char c);
-void printstr(char *s);
+void uartputs(char *s);

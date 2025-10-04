@@ -53,7 +53,7 @@ main(void)
 	if (message.error != 0)
 	{
 		/* SBI debug console not available, fall back to direct UART */
-		printstr(MSG_NO_DBCN);
+		uartputs(MSG_NO_DBCN);
 		for(;;);
 	}
 
