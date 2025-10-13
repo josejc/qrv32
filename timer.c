@@ -24,9 +24,10 @@ setup_s_mode_interrupt(void)
 	set_sstatus_bit(BIT(b_sie));		// enable flag s-mode interrupt (bit sie)
 }
 
-void 
+Ureg * 
 s_mode_interrupt_handler(void)
 {
+	Ureg *ureg = (Ureg *) UREGADDR;
 	struct sbiret message;
 
 	// We only expect the timer interrupt to happen here, no need to inspect the cause
@@ -36,4 +37,7 @@ s_mode_interrupt_handler(void)
 	message.error = 16;
 	message.value = (ulong) MSG_TIMER;
 	sbi_debug_console_write(&message);
+
+	return ureg;
 }
+

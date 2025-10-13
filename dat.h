@@ -6,9 +6,11 @@
 #define MACHP(n)    (n == 0 ? (Mach*)(MACHADDR) : (Mach*)0)
 #define AOUT_MAGIC	Z_MAGIC
 
+typedef struct Ureg Ureg;
 typedef struct sbiret sbiret;
 
 struct sbiret {
     ulong  error;
     ulong  value;
 };
+

@@ -23,4 +23,4 @@ void uartputc(char c);
 void uartputs(char *s);
 void set_timer_in_near_future(void);
 void setup_s_mode_interrupt(void);
-void s_mode_interrupt_handler(void);
+Ureg *s_mode_interrupt_handler(void);
